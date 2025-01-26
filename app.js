@@ -5,16 +5,8 @@ let started = false;
 let level = 0;
 
 const h2 = document.querySelector('h2'); // Reference to the level display element
-const btnElements = document.querySelectorAll('.btn'); // Select all buttons
-
-// Listen for keypress to start the game
-document.addEventListener("keypress", function () {
-    if (!started) {
-        console.log("game is started");
-        started = true;
-        levelUp();
-    }
-});
+const btnElements = document.querySelectorAll('.btn'); // Select all color buttons
+const startBtn = document.getElementById('start-btn'); // Reference to the Start button
 
 // Function to flash a button
 function btnFlash(btn) {
@@ -26,6 +18,8 @@ function btnFlash(btn) {
 
 // Function to handle the user's click on a button
 function handleUserClick(color) {
+    if (!started) return; // Do nothing if the game hasn't started
+
     userSeq.push(color);
     let clickedBtn = document.querySelector(`.${color}`);
     btnFlash(clickedBtn);
@@ -55,7 +49,7 @@ function checkUserSequence() {
 
 // Game over function to reset the game
 function gameOver() {
-    h2.innerText = "Game Over! Press any key to restart";
+    h2.innerText = "Game Over! Press the 'Start' button to restart";
     gameSeq = []; // Reset the game sequence
     userSeq = []; // Reset the user sequence
     started = false; // Game is not started anymore
@@ -76,12 +70,22 @@ function levelUp() {
     btnFlash(randBtn);
 }
 
-// Add event listeners for each button
+// Add event listeners for each color button
 btnElements.forEach((btn) => {
     btn.addEventListener("click", () => {
-        if (started) {
-            let color = btn.classList[1]; // Get the color of the clicked button
-            handleUserClick(color);
-        }
+        let color = btn.classList[1]; // Get the color of the clicked button
+        handleUserClick(color);
     });
+});
+
+// Start the game when the Start button is clicked
+startBtn.addEventListener("click", () => {
+    if (!started) {
+        console.log("game is started");
+        started = true;
+        level = 0; // Reset level
+        gameSeq = []; // Reset game sequence
+        userSeq = []; // Reset user sequence
+        levelUp();
+    }
 });
