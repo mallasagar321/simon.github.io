@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Choose a Game</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Raleway:wght@400;700&family=Poppins:wght@500&display=swap');
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Raleway', sans-serif;
       margin: 0;
       padding: 0;
       display: flex;
@@ -14,43 +16,75 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-      background: linear-gradient(to right, #4facfe, #00f2fe);
+      background-color: #000;
       color: #fff;
       text-align: center;
+      overflow: hidden;
+      position: relative;
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 2.5rem; /* Reduced font size */
+      margin-bottom: 40px; /* Increased gap between heading and buttons */
+      text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.4);
+      transition: color 0.3s ease;
+    }
+
+    h1:hover {
+      color: #fff;
     }
 
     .button-container {
       display: flex;
-      gap: 20px;
+      gap: 30px; /* Increased gap between buttons */
     }
 
     .button {
-      background-color: #fff;
-      color: #4facfe;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1rem;
+      background: linear-gradient(90deg, #e60000, #0099cc); /* Gaming-inspired color */
+      color: #fff;
+      border: 2px solid transparent;
+      padding: 18px 50px; /* Increased padding for a more substantial look */
+      font-size: 1.4rem; /* Larger font size */
       font-weight: bold;
-      border-radius: 30px;
+      font-family: 'Poppins', sans-serif;
+      border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .button:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 50px;
+    }
+
+    .button:hover:before {
+      opacity: 1;
     }
 
     .button:hover {
+      background: linear-gradient(90deg, #cc0000, #006699); /* Hover effect with different colors */
+      border-color: #fff;
       transform: scale(1.1);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     }
 
     .button:active {
       transform: scale(0.95);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     @media (max-width: 480px) {
@@ -60,17 +94,56 @@
 
       .button-container {
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
       }
 
       .button {
-        padding: 12px 20px;
-        font-size: 0.9rem;
+        padding: 14px 35px;
+        font-size: 1.2rem;
+      }
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .stars span {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 1;
       }
     }
   </style>
 </head>
 <body>
+  <div class="stars">
+    <script>
+      const starContainer = document.querySelector('.stars');
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement('span');
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        starContainer.appendChild(star);
+      }
+    </script>
+  </div>
   <h1>Choose a Game</h1>
   <div class="button-container">
     <button class="button" onclick="window.location.href='simon.html'">Simon</button>
