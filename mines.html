@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Mines Game</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+  <div class="wallet">
+    Wallet Balance: $<span id="walletBalance">100</span>
+    <button id="addMoneyBtn" class="button small-button">Add Money</button>
+  </div>
+  <br>
+  
+
+  <div class="game-container">
+    <div class="left-panel">
+      <h1>Mines Game</h1>
+      <div class="settings">
+        <label for="betAmount">Bet Amount:</label>
+        <input type="number" id="betAmount" min="1" max="100" value="10">
+      </div>
+
+      <div class="settings">
+        <label for="mineCount">Number of Mines:</label>
+        <input type="number" id="mineCount" min="1" max="24" value="5">
+      </div>
+
+      <div class="info">Multiplier: <span id="multiplier">1x</span></div>
+
+      <button class="button" id="applySettingsBtn">Bet</button>
+      <button class="button" id="cashOutBtn">Cash Out</button>
+      
+
+      <div class="info" id="message"></div>
+    </div>
+
+    <div class="grid-container">
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
