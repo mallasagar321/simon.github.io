@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,8 +6,205 @@
   <link rel="stylesheet" href="style.css">
   <title>Mines Game</title>
   <style>
-    
-  </style>
+    /* Body with dark background and blinking stars */
+    body {
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: black;
+        margin: 0;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Blinking stars background */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(2px 2px at 20% 30%, white, transparent),
+                    radial-gradient(1.5px 1.5px at 50% 70%, white, transparent),
+                    radial-gradient(1px 1px at 80% 20%, white, transparent),
+                    radial-gradient(1.5px 1.5px at 60% 40%, white, transparent),
+                    radial-gradient(1px 1px at 10% 90%, white, transparent),
+                    radial-gradient(1.5px 1.5px at 40% 10%, white, transparent);
+        background-size: 150px 150px;
+        background-repeat: repeat;
+        animation: blink 2s infinite alternate;
+        z-index: -1;
+    }
+
+    @keyframes blink {
+        0%, 100% {
+            opacity: 0.8;
+        }
+        50% {
+            opacity: 0.4;
+        }
+    }
+
+    /* Shooting stars */
+    .shooting-star {
+        position: absolute;
+        width: 2px;
+        height: 80px;
+        background: linear-gradient(white, transparent);
+        opacity: 0.8;
+        transform: rotate(-45deg);
+        animation: shooting-star 3s infinite ease-in-out;
+    }
+
+    @keyframes shooting-star {
+        0% {
+            top: -50px;
+            left: calc(100% - 20px); /* Start from off-screen on the right */
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.8;
+        }
+        100% {
+            top: 100%;
+            left: calc(-50px); /* Exit off-screen on the left */
+            opacity: 0;
+        }
+    }
+
+    /* Adjusted shooting star positions */
+    .shooting-star:nth-child(1) {
+        animation-delay: 0s;
+        animation-duration: 2.5s;
+        left: 75%; /* Adjusted start position to avoid circles */
+    }
+
+    .shooting-star:nth-child(2) {
+        animation-delay: 1s;
+        animation-duration: 3s;
+        left: 50%; /* Different start position */
+    }
+
+    .shooting-star:nth-child(3) {
+        animation-delay: 2s;
+        animation-duration: 3.5s;
+        left: 25%; /* Different start position */
+    }
+
+    /* Blinking heading for "Simon Says Game" */
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5);
+        animation: heading-blink 1.5s infinite alternate; /* Blinking animation */
+    }
+
+    @keyframes heading-blink {
+        0%, 100% {
+            opacity: 1; /* Fully visible */
+        }
+        50% {
+            opacity: 0.5; /* Partially faded */
+        }
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Buttons container and styling */
+    .btn-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .line-one, .line-two {
+        display: flex;
+    }
+
+    .btn {
+        width: 120px;
+        height: 120px;
+        margin: 20px;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.8;
+        cursor: pointer;
+        transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .red { background-color: red; }
+    .yellow { background-color: yellow; }
+    .green { background-color: green; }
+    .purple { background-color: purple; }
+
+    .flash {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    .btn:active {
+        opacity: 0.6;
+    }
+
+    /* Hover effect for color buttons */
+    .btn:hover {
+        transform: scale(1.1); /* Slightly enlarge the button */
+        box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.2); /* Add a glowing shadow */
+        opacity: 1; /* Make it fully visible */
+    }
+
+    /* Styling the Start button */
+    .start-btn {
+        margin-top: 20px;
+        padding: 10px 30px;
+        font-size: 1.5rem;
+        background-color: white;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .start-btn:hover {
+        transform: scale(1.05);
+        background-color: black;
+        color: white;
+        box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .start-btn:active {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    @media (max-width: 600px) {
+        .btn {
+            width: 80px;
+            height: 80px;
+        }
+
+        h1, h2 {
+            font-size: 1.5rem;
+        }
+
+        .start-btn {
+            padding: 8px 20px;
+            font-size: 1rem;
+        }
+    }
+</style>
 </head>
 <body>
   <div class="wallet">
@@ -43,7 +240,12 @@
       <div class="grid" id="grid"></div>
     </div>
   </div>
-
+  <div class="btn1-container">
+    <button class="btn1" onclick="window.location.href='index.html'">Menu</button>
+  </div>
+  <!-- <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div> -->
 <script src="app.js"></script>
 </body>
 </html>
