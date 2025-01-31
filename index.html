@@ -25,8 +25,8 @@
 
     h1 {
       font-family: 'Press Start 2P', cursive;
-      font-size: 2.5rem; /* Reduced font size */
-      margin-bottom: 40px; /* Increased gap between heading and buttons */
+      font-size: 2rem; /* Adjusted for smaller font on mobile */
+      margin-bottom: 30px; /* Reduced gap between heading and buttons */
       text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.4);
       transition: color 0.3s ease;
     }
@@ -37,15 +37,15 @@
 
     .button-container {
       display: flex;
-      gap: 30px; /* Increased gap between buttons */
+      gap: 20px; /* Adjusted gap between buttons */
     }
 
     .button {
-      background: linear-gradient(90deg, #e60000, #0099cc); /* Gaming-inspired color */
+      background: linear-gradient(90deg, #e60000, #0099cc);
       color: #fff;
       border: 2px solid transparent;
-      padding: 18px 50px; /* Increased padding for a more substantial look */
-      font-size: 1.4rem; /* Larger font size */
+      padding: 14px 35px; /* Adjusted padding for smaller screens */
+      font-size: 1.2rem; /* Smaller font size for better fit */
       font-weight: bold;
       font-family: 'Poppins', sans-serif;
       border-radius: 50px;
@@ -76,7 +76,7 @@
     }
 
     .button:hover {
-      background: linear-gradient(90deg, #cc0000, #006699); /* Hover effect with different colors */
+      background: linear-gradient(90deg, #cc0000, #006699);
       border-color: #fff;
       transform: scale(1.1);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
@@ -89,17 +89,17 @@
 
     @media (max-width: 480px) {
       h1 {
-        font-size: 2rem;
+        font-size: 1.6rem; /* Further reduced font size for mobile */
       }
 
       .button-container {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px; /* Adjusted button gap for mobile */
       }
 
       .button {
-        padding: 14px 35px;
-        font-size: 1.2rem;
+        padding: 12px 28px; /* Adjusted padding for mobile */
+        font-size: 1rem; /* Smaller font size for mobile */
       }
     }
 
@@ -132,6 +132,21 @@
   </style>
 </head>
 <body>
+  <audio id="background-music" src="second.mp3" autoplay loop></audio>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const audio = document.getElementById("background-music");
+        audio.volume = 0.5; // Adjust volume (0.0 to 1.0)
+  
+        // Try playing immediately
+        audio.play().catch(() => {
+            // If autoplay is blocked, wait for user interaction
+            document.body.addEventListener("click", () => {
+                audio.play();
+            }, { once: true });
+        });
+    });
+  </script>
   <div class="stars">
     <script>
       const starContainer = document.querySelector('.stars');
