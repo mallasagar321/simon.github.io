@@ -132,21 +132,6 @@
   </style>
 </head>
 <body>
-  <audio id="background-music" src="second.mp3" autoplay loop></audio>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const audio = document.getElementById("background-music");
-        audio.volume = 0.5; // Adjust volume (0.0 to 1.0)
-  
-        // Try playing immediately
-        audio.play().catch(() => {
-            // If autoplay is blocked, wait for user interaction
-            document.body.addEventListener("click", () => {
-                audio.play();
-            }, { once: true });
-        });
-    });
-  </script>
   <div class="stars">
     <script>
       const starContainer = document.querySelector('.stars');
